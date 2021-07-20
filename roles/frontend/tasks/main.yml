@@ -1,0 +1,30 @@
+- name: Install dependencies
+  apt:
+    name: "{{packages}}"
+    update_cache: yes
+    state: present
+
+- name: Clone GIT Repo
+  git:
+    repo: https://github.com/naveenzelarsoft/frontend.git
+    dest: /var/www/html/
+
+- name: Remove default files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+      - /etc/nginx/sites-enabled/default
+      - /etc/nginx/sites-available/default
+
+- name: Copy config file
+  template:
+    src: todo.conf
+    dest: /etc/nginx/sites-enabled/todo.conf
+
+- name: Start Nginx
+  systemd:
+    state: restarted
+    name: nginx
+    enabled: yes
+

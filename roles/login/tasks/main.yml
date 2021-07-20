@@ -1,0 +1,16 @@
+- name: Install dependencies
+  apt:
+    name: golang
+    update_cache: yes
+    state: present
+
+- name: including role
+  include_role:
+    name: common
+    tasks_from: nexus-download-component
+
+- name: including role
+  include_role:
+    name: common
+    tasks_from: start-service
+

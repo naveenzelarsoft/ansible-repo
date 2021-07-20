@@ -1,0 +1,11 @@
+[Unit]
+Description = todo Service
+[Service]
+
+Environment=REDIS_HOST=redis.naveenbommakanti.uk
+ExecStart=/bin/node --no-warnings /home/ubuntu/server.js
+SyslogIdentifier=todo
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

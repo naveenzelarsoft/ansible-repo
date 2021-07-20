@@ -1,0 +1,10 @@
+- name: Clone GIT Repo
+  git:
+    repo: https://github.com/naveenzelarsoft/{{COMPONENT}}.git
+    dest: /home/ubuntu/{{COMPONENT}}
+
+#- name: Unzip the Downloaded Content
+# unarchive:
+#    src: /home/ubuntu/{{COMPONENT}}.zip
+#    dest: /home/ubuntu/
+#    remote_src: yes
