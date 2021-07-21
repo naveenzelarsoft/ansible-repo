@@ -4,10 +4,18 @@
     update_cache: yes
     state: present
 
-- name: Clone GIT Repo
-  git:
-    repo: https://github.com/naveenzelarsoft/frontend.git
+- name: Download {{COMPONENT}} from Nexus
+  get_url:
+    url: http://172.31.12.251:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APPVERSION}}.zip
+    dest: /var/www/html/{{COMPONENT}}.zip
+    username: admin
+    password: admin
+
+- name: Unzip the Downloaded Content
+  unarchive:
+    src: /var/www/html/{{COMPONENT}}.zip
     dest: /var/www/html/
+    remote_src: yes
 
 - name: Remove default files
   file:
@@ -27,4 +35,3 @@
     state: restarted
     name: nginx
     enabled: yes
-
