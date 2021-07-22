@@ -25,20 +25,5 @@
     name: common
     tasks_from: start-service
 
-- name: Install Node Exporter Prometheus Monitoring
-  include_role:
-    name: common
-    tasks_from: node-exporter
-
-- name: Install Filebeat Monitoring
-  include_role:
-   name: common
-   tasks_from: filebeat
-  vars:
-   IS_STRUCTURED: false
-   IS_JAVA: true
-   LOG_FILES:
-    - { file: "/var/log/{{COMPONENT}}.log", type: "{{COMPONENT}}" }
-
 
 #  update alternatives --config java
